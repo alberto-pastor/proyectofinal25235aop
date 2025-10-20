@@ -1,5 +1,10 @@
-import { render } from 'preact'
-import './index.css'
-import { App } from './app.jsx'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import App from './App.jsx'
 
-render(<App />, document.getElementById('app'))
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
