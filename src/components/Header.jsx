@@ -6,7 +6,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     return(
-        <Navbar className="mb-4" bg="dark" variant="dark" expand="lg">
+        <Navbar className="mb-4" bg="light" variant="light" expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
                     <img
@@ -14,7 +14,7 @@ const Header = () => {
                         alt="Logo"
                         className="d-inline-block align-top me-2"
                     />
-                    <span>Veni a degustar nuestro platos</span>
+                    <span className="fs-3">Veni a degustar nuestro platos!!</span>
                 </Navbar.Brand>
 
                 <Nav className="ms-auto align-items-center">
@@ -23,10 +23,10 @@ const Header = () => {
                     <Nav.Link as={Link} to="/Ofertas" className="me-3">Ofertas</Nav.Link>
 
                     <div className="d-flex align-items-center">
-                        <Button variant="outline-light" as={Link} to="administracion" className="me-2">
+                        <Button variant="outline-dark" as={Link} to="administracion" className="me-2">
                             Administración
                         </Button>
-                        <Link to="carrito" className="text-white">
+                        <Link as={Link} to="/" className="text-dark">
                             <FontAwesomeIcon icon={faShoppingCart} size="lg"/>
                         </Link>
                     </div>

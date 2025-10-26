@@ -6,7 +6,6 @@ import Novedades from './components/Novedades';
 import Login from './components/Login';
 import Footer from './components/Footer';
 
-
 function App() {
   return (
     <Router>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import ProductCard from './ProductCard';
+import Swal from 'sweetalert2';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
-const ProductList = ({ difficulty = null }) =>
+const ProductList = ({ tag = null }) =>
     {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -10,16 +12,15 @@ const ProductList = ({ difficulty = null }) =>
     useEffect(() => 
     {
         let url = 'https://dummyjson.com/recipes/';
-        if (difficulty)
+        if (tag)
         {
-            url = `https://dummyjson.com/recipes/difficulty/${difficulty}`;
+            url = `https://dummyjson.com/recipes/tag/${tag}`;
         }
 
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
             setProducts(data.recipes);
-            console.log(data.recipes);
             setLoading(false);
         })
      
@@ -28,10 +29,13 @@ const ProductList = ({ difficulty = null }) =>
             setLoading(false);
         })
 
-    }, [difficulty]);
+    }, [tag]);
 
     const handleAgregarAlCarrito = (product) => {
-        alert(`Producto ${product.name} agregado al carrito`);
+        Swal.fire({
+            title: `Producto ${product.name} Agregado al carrito`,
+            icon: 'success'
+        });
     };
 
     if (loading) {
