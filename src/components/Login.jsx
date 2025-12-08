@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (user === 'admin' && pass === '1234') {
+    if (user === 'admin' && pass === 'Pera27#') {
       navigate('/crud');
     } else {
       alert('Usuario o contraseña incorrectos');
