@@ -21,7 +21,7 @@ const Carrito = () => {
 
   return (
     <Container className="mt-4">
-      <h3>Carrito de compras</h3>
+      <h3>Su Pedido: </h3>
       <Table striped bordered hover responsive className="mt-3">
         <thead>
           <tr>
