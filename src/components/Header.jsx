@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Navbar, Nav, Container, Button, Badge } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from './CartContext';
 
 const Header = () => {
+    const { carrito } = useContext(CartContext);
+    const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    
     return(
         <Navbar className="mb-4" bg="light" variant="light" expand="lg">
             <Container>
@@ -23,18 +27,24 @@ const Header = () => {
                     <Nav.Link as={Link} to="/Ofertas" className="me-3">Ofertas</Nav.Link>
 
                     <div className="d-flex align-items-center">
-                        <Button variant="outline-dark" as={Link} to="administracion" className="me-2">
+                        <Button variant="outline-dark" as={Link} to="/administracion" className="me-2">
                             Administración
                         </Button>
-                        <Link as={Link} to="/" className="text-dark">
+                        
+                        <Link to="/Carrito" className="text-dark">
                             <FontAwesomeIcon icon={faShoppingCart} size="lg"/>
+                            {totalItems > 0 && (
+                                <Badge pill bg="danger" className="position-absolute top-0 start-100 translate-middle">
+                                    {totalItems}
+                                </Badge>
+                            )}
                         </Link>
                     </div>
                 </Nav>
             </Container>
         </Navbar>
     );
-}
+};
 
 export default Header;
 

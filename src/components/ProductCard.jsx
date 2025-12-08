@@ -15,10 +15,15 @@ const ProductCard = ({ product, agregarAlCarrito }) => {
             <Card.Body className="d-flex flex-column">
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>
-                    <p>💰 <strong>Precio:</strong> $ {product.caloriesPerServing * 20}</p>                             
-                    <p>🍽️ <strong>Cocina:</strong> {product.cuisine}</p>
-                    <p>⏱️ <strong>Tiempo de Preparación:</strong> {product.prepTimeMinutes + product.cookTimeMinutes} min</p>
+                    💰 <strong>Precio:</strong> $ {Number(product.price)}                             
                 </Card.Text>
+                <Card.Text>
+                    🍽️ <strong>Cocina:</strong> {product.cuisine}
+                </Card.Text>
+                <Card.Text>
+                    ⏱️ <strong>Tiempo de Preparación:</strong> {product.prepTimeMinutes + product.cookTimeMinutes} min
+                </Card.Text>
+                
                 <Button variant="primary" onClick={()=> agregarAlCarrito(product)}>
                     Agregar al carrito
                 </Button>

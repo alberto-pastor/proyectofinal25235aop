@@ -5,7 +5,7 @@ const Novedades = () =>{
     return (
         <div className="container">
             <h1>Cocina Italiana</h1>
-            <ProductList tag="Italian"/>
+            <ProductList cuisine='Italian'/>
         </div>
     );
 }

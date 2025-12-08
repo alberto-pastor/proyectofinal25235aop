@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Form, Modal } from "react-bootstrap";
 
-const API_URL = "https://692b7640c829d464006cf3ef.mockapi.io/productos";
+const API_URL = 'https://692b7640c829d464006cf3ef.mockapi.io/productos/';
 
 const CrudProductos = () => {
     const [productos, setProductos] = useState([]);
     const [show, setShow] = useState(false);
     const [form, setForm] = useState({
-        title: "",
-        description: "",
+        mealType: "",
+        name: "",
+        cuisine: "",
         price: "",
-        stock: "",
+        prepTimeMinutes: "",
+        cookTimeMinutes: "",
         image: "",
     });
 
@@ -25,7 +27,7 @@ const CrudProductos = () => {
     //cerrar formulario modal
     const handleClose = () => {
         setShow(false);
-        setForm({ title: "", description: "", price: "", stock: "", image: "" });
+        setForm({ mealType: "", name: "", cuisine: "", price: "", prepTimeMinutes: "",cookTimeMinutes: "", image: "" });
         setEditId(null);
     };
 
@@ -35,7 +37,8 @@ const CrudProductos = () => {
             setForm({
                 ...producto,
                 price: Number(producto.price),
-                stock: Number(producto.stock),
+                prepTimeMinutes: Number(producto.prepTimeMinutes),
+                cookTimeMinutes: Number(producto.cookTimeMinutes),
             });
             setEditId(producto.id);
         }
@@ -48,7 +51,8 @@ const CrudProductos = () => {
         const productData = {
             ...form,
             price: Number(form.price),
-            stock: Number(form.stock),
+            prepTimeMinutes: Number(form.prepTimeMinutes),
+            cookTimeMinutes: Number(form.cookTimeMinutes),
         };
 
         const method = editId ? "PUT" : "POST";
@@ -93,10 +97,11 @@ return (
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Título</th>
+            <th>Tipo</th>
             <th>Descripción</th>
+            <th>Cocina</th>
             <th>Precio</th>
-            <th>Stock</th>
+            <th>Preparación</th>
             <th>Imagen</th>
             <th>Acciones</th>
           </tr>
@@ -104,10 +109,11 @@ return (
         <tbody>
           {productos.map(prod => (
             <tr key={prod.id}>
-              <td>{prod.title}</td>
-              <td>{prod.description}</td>
-              <td>${Number(prod.price).toFixed(2)}</td>
-              <td>{prod.stock}</td>
+              <td>{prod.mealType}</td>
+              <td>{prod.name}</td>
+              <td>{prod.cuisine}</td>
+              <td>$ {Number(prod.price)}</td>
+              <td>{prod.prepTimeMinutes + prod.cookTimeMinutes} min</td>
               <td>
                 {prod.image?.startsWith('http') ? (
                   <img src={prod.image} alt={prod.title} width={50} />
@@ -131,18 +137,26 @@ return (
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-2">
-              <Form.Label>Título</Form.Label>
+              <Form.Label>Tipo</Form.Label>
               <Form.Control
-                value={form.title}
-                onChange={e => setForm({ ...form, title: e.target.value })}
+                value={form.mealType}
+                onChange={e => setForm({ ...form, mealType: e.target.value })}
                 required
               />
             </Form.Group>
             <Form.Group className="mb-2">
               <Form.Label>Descripción</Form.Label>
               <Form.Control
-                value={form.description}
-                onChange={e => setForm({ ...form, description: e.target.value })}
+                value={form.name}
+                onChange={e => setForm({ ...form, name: e.target.value })}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Tipo de Cocina</Form.Label>
+              <Form.Control
+                value={form.cuisine}
+                onChange={e => setForm({ ...form, cuisine: e.target.value })}
                 required
               />
             </Form.Group>
@@ -156,11 +170,20 @@ return (
               />
             </Form.Group>
             <Form.Group className="mb-2">
-              <Form.Label>Stock</Form.Label>
+              <Form.Label>Tiempo de Preparación</Form.Label>
               <Form.Control
                 type="number"
-                value={form.stock}
-                onChange={e => setForm({ ...form, stock: Number(e.target.value) })}
+                value={form.prepTimeMinutes}
+                onChange={e => setForm({ ...form, prepTimeMinutes: Number(e.target.value) })}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Tiempo de Cocción</Form.Label>
+              <Form.Control
+                type="number"
+                value={form.cookTimeMinutes}
+                onChange={e => setForm({ ...form, cookTimeMinutes: Number(e.target.value) })}
                 required
               />
             </Form.Group>

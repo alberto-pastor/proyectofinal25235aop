@@ -4,8 +4,8 @@ import ProductList from "./ProductList";
 const Ofertas = () =>{
     return(
         <div className="container">
-            <h1>Ofertas - Pollo</h1>
-            <ProductList tag="Chicken"/>
+            <h1>Ofertas - Platos Asiaticos</h1>
+            <ProductList cuisine="Asian"/>
         </div>
     );
 };
